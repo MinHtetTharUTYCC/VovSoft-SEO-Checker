@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.bookshellf.R
+import com.example.bookshellf.model.Book
 import com.example.bookshellf.ui.screens.components.ErrorScreen
 import com.example.bookshellf.ui.screens.components.LoadingScreen
 import com.example.bookshellf.ui.screens.details_screen.DetailsUiState
@@ -21,6 +22,7 @@ fun FavoriteScreen(
     modifier: Modifier = Modifier,
     viewModel: QueryViewModel,
     bookshelfUiState: QueryUiState,
+    onDetailClick: (Book) -> Unit,
     retryAction: () -> Unit,
 
     ) {
@@ -32,7 +34,7 @@ fun FavoriteScreen(
                 is QueryUiState.Success -> GridList(
                     viewModel = viewModel,
                     bookshelfList = bookshelfUiState.bookshelfList,
-                    onDetailClick = {}
+                    onDetailClick = { onDetailClick}
                 )
             }
         }

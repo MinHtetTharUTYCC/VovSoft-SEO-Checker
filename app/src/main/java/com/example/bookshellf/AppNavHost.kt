@@ -50,6 +50,10 @@ fun BookshelfNavHost(
             FavoriteScreen(
                 viewModel = viewModel,
                 bookshelfUiState = viewModel.favoritesUiState,
+                onDetailClick = {
+                                viewModel.selectedBookId = it.id
+                    navController.navigate(AppDestinations.DetailScreen.name)
+                },
                 retryAction = { viewModel.getBooks() }
             )
         }
