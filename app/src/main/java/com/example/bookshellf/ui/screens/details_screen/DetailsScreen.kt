@@ -23,13 +23,18 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.bookshellf.R
 import com.example.bookshellf.model.Book
+import com.example.bookshellf.model.ListPrice
+import com.example.bookshellf.model.SaleInfo
+import com.example.bookshellf.model.VolumeInfo
 import com.example.bookshellf.ui.screens.components.ErrorScreen
 import com.example.bookshellf.ui.screens.components.LoadingScreen
+import com.example.bookshellf.ui.theme.BookshellfTheme
 
 @Composable
 fun DetailsScreen(
@@ -88,15 +93,79 @@ fun BookDetails(bookItem: Book) {
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            Text(
-                text = stringResource(id = R.string.book_subtitle, bookItem.volumeInfo.subtitle),
-                style = MaterialTheme.typography.titleMedium
-            )
+            if (bookItem.volumeInfo.subtitle != null) {
+                Text(
+                    text = stringResource(id = R.string.book_subtitle, bookItem.volumeInfo.subtitle),
+                    style = MaterialTheme.typography.titleMedium
+                )
+            }
+
             Text(
                 text = stringResource(id = R.string.book_authors, bookItem.volumeInfo.allAuthors()),
                 style = MaterialTheme.typography.titleMedium
             )
+
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_small)))
+
+            Text(
+                text = stringResource(id = R.string.book_price, bookItem.saleInfo.getPrice2),
+                style = MaterialTheme.typography.titleMedium
+            )
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_small)))
+
+            Text(
+                text = "Country: " + bookItem.saleInfo.country,
+                style = MaterialTheme.typography.titleMedium
+            )
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_small)))
+
+            Text(
+                text = "List Price: " + bookItem.getPrice(),
+                style = MaterialTheme.typography.titleMedium
+            )
+            Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_small)))
+
+            if (bookItem.volumeInfo != null)
+
+            {
+                Text(
+                    text = "Description: " + bookItem.volumeInfo.description,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
         }
 
     }
 }
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun DetailsScreenPreview() {
+    BookshellfTheme {
+
+        val volumeInfo = VolumeInfo(
+            title = "A book",
+            description = "Caniss ortum, tanquam bassus exemplar.",
+            publishedDate = "11/11/2011",
+            authors =  listOf("AAA","aaa"),
+            publisher = "John Carter",
+            subtitle = "Cunu litist",
+            imageLinks = null,
+        )
+        val saleInfo = SaleInfo(
+            country = "USA",
+            isEbook = false,
+            listPrice = ListPrice(amount = 2.22f, currency = "US Dollar")
+        )
+
+        val mockData =
+            Book(
+                id = "123",
+                volumeInfo = volumeInfo,
+                saleInfo = saleInfo,
+                description = volumeInfo.description
+            )
+        BookDetails(bookItem = mockData)
+    }
+}
+
